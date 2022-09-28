@@ -1,0 +1,50 @@
+<app-header></app-header>
+
+<section class="container">
+  <div class="list">
+    <div *ngFor="let job of arrayJobs">
+      <div class="job" (click)="openDetail(job)">
+        <div class="team">
+          <p class="nameTeam">{{ job.teamName }}</p>
+        </div>
+        <div class="titleJob">
+          <p>{{ job.vacancyName }} - {{ job.games }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <div class="card" id="card">
+      <div class="team">
+        <p class="nameTeam">{{ teamName }}</p>
+      </div>
+      <div class="description">
+        <div class="infos">
+          <div class="title">
+            <h2><span>Vaga:</span> {{ vacancyName }}</h2>
+            <h2><span>Jogo:</span> {{ teamGame }}</h2>
+          </div>
+          <p>
+            {{ vacancyDescription }}
+          </p>
+        </div>
+        <div class="date">
+          <p>
+            Período de inscrição: <span>{{ vacancyStartDate }}</span> até
+            <span>{{ vacancyEndDate }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button>Candidatar-se</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <app-publi [bigPubli]="bigPubli" [hasHeader]="hasHeader"></app-publi>
+</section>

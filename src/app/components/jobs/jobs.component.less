@@ -1,0 +1,177 @@
+@import '../../app.component.less';
+
+.container {
+    width: calc(100% - 2px);
+    height: 100vh;
+    display: grid;
+    padding-top: 70px;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: 25% 1px 50% 1px 25%;
+
+    .list {
+        gap: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding: 25px;
+        flex-direction: column;
+
+        .job {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            cursor: pointer;
+            border-radius: 12px;
+            flex-direction: column;
+            background-color: @fundo;
+
+            .team {
+                height: 75px;
+                display: flex;
+                padding: 25px;
+                align-items: center;
+                border-bottom: 1px solid @cinzaEscuro;
+
+                .nameTeam {
+                    color: @branco;
+                    font-size: 14px;
+                }
+            }
+
+            .titleJob {
+                height: 75px;
+                display: flex;
+                padding: 25px;
+                align-items: center;
+                text-transform: capitalize;
+
+                p {
+                    color: @branco;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        padding: 25px;
+
+        .card {
+            width: calc(100% - 50% - 52px);
+            height: calc(100% - 120px);
+            display: none;
+            position: fixed;
+            border-radius: 12px;
+            background-color: @fundo;
+            grid-template-rows: 75px auto 75px;
+
+            .team {
+                gap: 10px;
+                height: 75px;
+                display: flex;
+                padding: 25px;
+                align-items: center;
+                border-bottom: 1px solid @cinzaEscuro;
+
+                .nameTeam {
+                    color: @branco;
+                    font-size: 14px;
+                }
+            }
+
+            .description {
+                width: 100%;
+                height: 100%;
+                margin: auto;
+                display: flex;
+                overflow: auto;
+                color: @branco;
+                padding: 20px 100px;
+                flex-direction: column;
+                justify-content: space-between;
+
+                &::-webkit-scrollbar {
+                    width: 10px;
+                }
+
+                &::-webkit-scrollbar-track {
+                    background: @fundo;
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: @neutra;
+                    border-radius: 10px;
+                }
+
+                .infos {
+                    gap: 10px;
+                    display: flex;
+                    flex-direction: column;
+
+                    .title {
+                        display: flex;
+                        justify-content: space-between;
+                        
+                        h2 {
+                            text-transform: capitalize;
+
+                            span {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+    
+                    p {
+                        font-size: 12px;
+                        margin: 10px 0 20px;
+                    }
+                }
+
+                .date {
+                    text-align: center;
+
+                    p {
+                        font-size: 14px;
+
+                        span {
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+
+            .buttons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-top: 1px solid @cinzaEscuro;
+
+                button {
+                    border: none;
+                    color: @branco;
+                    cursor: pointer;
+                    padding: 10px 20px;
+                    border-radius: 12px;
+                    background-color: @cinzaEscuro;
+                    font-family: 'Inter', sans-serif;
+                }
+            }
+        }
+    }
+
+    .divider {
+        width: 1px;
+        height: 100%;
+        opacity: 20%;
+        border: 1px solid @cinzaEscuro;
+    }
+
+    app-publi {
+        width: 100%;
+        height: 100%;
+    }
+}

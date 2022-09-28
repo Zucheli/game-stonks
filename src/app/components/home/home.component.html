@@ -1,0 +1,27 @@
+<section class="container">
+  <div class="content">
+    <div class="title">
+      <h1>Seja bem-vindo ao ntime</h1>
+    </div>
+    <div class="cards">
+      <a routerLink="/jobs" class="card">
+        <div class="icon jobs"></div>
+        <p>Vagas</p>
+      </a>
+
+      <a routerLink="/training" class="card">
+        <div class="icon training"></div>
+        <p>Treinamento</p>
+      </a>
+
+      <a routerLink="/profile" class="card">
+        <div class="icon profile"></div>
+        <p>Perfil</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <app-publi [bigPubli]="bigPubli" [hasHeader]="hasHeader"></app-publi>
+</section>
