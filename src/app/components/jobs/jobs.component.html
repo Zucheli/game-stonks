@@ -5,7 +5,9 @@
     <div *ngFor="let job of arrayJobs">
       <div class="job" (click)="openDetail(job)">
         <div class="team">
-          <p class="nameTeam">{{ job.teamName }}</p>
+          <p class="nameTeam">
+            {{ job.teamName }}
+          </p>
         </div>
         <div class="titleJob">
           <p>{{ job.vacancyName }} - {{ job.games }}</p>
@@ -19,7 +21,7 @@
   <div class="content">
     <div class="card" id="card">
       <div class="team">
-        <p class="nameTeam">{{ teamName }}</p>
+        <p class="nameTeam" (click)="openTeamDetail()">{{ teamName }}</p>
       </div>
       <div class="description">
         <div class="infos">
@@ -39,7 +41,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button>Candidatar-se</button>
+        <button (click)="applyVacancy()">Candidatar-se</button>
       </div>
     </div>
   </div>
@@ -48,3 +50,37 @@
 
   <app-publi [bigPubli]="bigPubli" [hasHeader]="hasHeader"></app-publi>
 </section>
+
+<div class="modalTeam" id="modalTeam">
+  <div class="backdrop" (click)="closeModal()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h1 class="teamName">{{ teamName }}</h1>
+      <p class="description">{{ teamDescription }}</p>
+      <div class="vacancys">
+        <h4>Vagas:</h4>
+        <div class="vacancy">
+          <h3>{{ vacancys.name }}</h3>
+          <p>{{ vacancys.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

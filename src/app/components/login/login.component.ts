@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   user: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
   ngOnInit(): void {}
 
@@ -29,9 +30,8 @@ export class LoginComponent implements OnInit {
     let password = form.value.password;
     if (user == '' || password == '') {
       Swal.fire({
-        title: 'Atenção!',
         text: 'Preencha todos os campos para fazer o login!',
-        icon: 'error',
+        icon: 'warning',
       });
     } else {
       let login = {
@@ -46,12 +46,18 @@ export class LoginComponent implements OnInit {
     this.subscription.add(
       this.authService.login(login).subscribe({
         next: (response) => {
-          console.log(response);
+          localStorage.setItem('token', response.access_token);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
-          console.log(error);
+          Swal.fire({
+            text: 'Usuário não cadastrado, por favor se cadastre!',
+            icon: 'error',
+          });
         },
       })
     );
   }
+
+  modalCreateAccount() {}
 }

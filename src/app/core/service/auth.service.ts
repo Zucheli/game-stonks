@@ -11,11 +11,9 @@ import { environment } from './../../../environments/environment';
 export class AuthService {
   private baseURL = `${environment.baseUrlApi}`;
 
-  constructor(private http: HttpClient) {}
+  public token = localStorage.getItem('token');
 
-  getListJobs(): Observable<any> {
-    return this.http.get<any>(`${this.baseURL}/teams/vacancies`);
-  }
+  constructor(private http: HttpClient) {}
 
   login(login: any): Observable<any> {
     const body = new HttpParams()
@@ -28,22 +26,26 @@ export class AuthService {
         .set('Content-Type', 'application/x-www-form-urlencoded')
         .set('Authorization', 'Basic ' + btoa('stonks:stonks123456')),
     });
-    // return this.http.post<any>(`${this.baseURL}/oauth/token`, login);
   }
 
-  // loginUser(email: string): Observable<any> {
-  //   return this.http.post<any>(`${this.baseURL}/login?email=${email}`, email);
-  // }
+  getListJobs(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/teams/vacancies`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
 
-  // saveUser(user: object): Observable<any> {
-  //   return this.http.post<any>(`${this.baseURL}/usuarios`, user);
-  // }
+  getTeam(teamId: any): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/teams/${teamId}`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
 
-  // sendMessage(message: object): Observable<any> {
-  //   return this.http.post<any>(`${this.baseURL}/questoes`, message);
-  // }
-
-  // getQuestion(password: string): Observable<any> {
-  //   return this.http.get<any>(`${this.baseURL}/questoes?password=${password}`);
-  // }
+  applyVacancy(infos: any): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseURL}/players/${infos.vacancyId}/teams/${infos.teamId}`,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
+  }
 }
