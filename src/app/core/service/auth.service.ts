@@ -48,4 +48,19 @@ export class AuthService {
       }
     );
   }
+
+  getUserInformation(): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseURL}/players/findAuthUserInformation`,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
+  }
+
+  creatAccount(account: any): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/players`, account, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
 }

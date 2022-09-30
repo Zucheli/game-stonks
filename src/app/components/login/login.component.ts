@@ -17,9 +17,18 @@ export class LoginComponent implements OnInit {
   bigPubli: boolean = true;
   hasHeader: boolean = false;
   viewPassword: boolean = false;
+  viewPasswordModal: boolean = false;
 
   user: string = '';
   password: string = '';
+
+  emailModal: string = '';
+  passwordModal: string = '';
+  firstNameModal: string = '';
+  lastNameModal: string = '';
+  cpfModal: string = '';
+  roleTeamType: string = '';
+  openToWorkModal: any;
 
   constructor(private authService: AuthService, public router: Router) {}
 
@@ -43,21 +52,91 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(login: any) {
-    this.subscription.add(
-      this.authService.login(login).subscribe({
+    this.authService.login(login).subscribe({
+      next: (response) => {
+        localStorage.setItem('token', response.access_token);
+        this.authService.getUserInformation().subscribe({
+          next: (response) => {
+            localStorage.setItem('role', response.roleDto.authority);
+            this.router.navigate(['/home']);
+          },
+        });
+      },
+      error: (error) => {
+        Swal.fire({
+          text: 'Usuário não cadastrado, por favor se cadastre!',
+          icon: 'error',
+        });
+      },
+    });
+  }
+
+  createAccount(form: any) {
+    let email = form.value.emailModal;
+    let password = form.value.passwordModal;
+    let firstName = form.value.firstNameModal;
+    let lastName = form.value.lastNameModal;
+    let cpf = form.value.cpfModal;
+    let roleType = form.value.roleType;
+    let openToWork = form.value.openToWorkModal;
+
+    if (
+      email == '' ||
+      password == '' ||
+      firstName == '' ||
+      lastName == '' ||
+      cpf == '' ||
+      roleType == '' ||
+      openToWork == ''
+    ) {
+      Swal.fire({
+        text: 'Preencha todos os campos para criar uma conta',
+        icon: 'warning',
+      });
+    } else {
+      openToWork == 'true' ? true : false;
+
+      let postAccount = {
+        cpf: cpf,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        openToWork: openToWork,
+        password: password,
+        roleDto: {
+          authority: roleType,
+        },
+      };
+
+      this.authService.creatAccount(postAccount).subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.access_token);
-          this.router.navigate(['/home']);
+          Swal.fire({
+            text: 'Usuário cadastrado com sucesso!',
+            icon: 'success',
+          });
+          this.closeModal();
         },
         error: (error) => {
           Swal.fire({
-            text: 'Usuário não cadastrado, por favor se cadastre!',
+            text: 'Usuário já cadastrado!',
             icon: 'error',
           });
         },
-      })
-    );
+      });
+    }
   }
 
-  modalCreateAccount() {}
+  modalCreateAccount() {
+    let modal = document.getElementById('modalAccount');
+    if (modal != undefined) {
+      modal.style.display = 'flex';
+    }
+  }
+
+  closeModal() {
+    let modal = document.getElementById('modalAccount');
+    if (modal != undefined) {
+      modal.style.display = 'none';
+    }
+  }
 }

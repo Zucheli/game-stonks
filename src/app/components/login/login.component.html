@@ -32,7 +32,143 @@
     </form>
     <div class="createAccount">
       <div class="divider"></div>
-      <button (click)="(modalCreateAccount)">Criar Conta</button>
+      <button (click)="modalCreateAccount()">Criar Conta</button>
     </div>
   </div>
 </section>
+
+<div class="modalAccount" id="modalAccount">
+  <div class="backdrop" (click)="closeModal()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Ficha Cadastral</h2>
+      <form #m="ngForm" (ngSubmit)="createAccount(m)">
+        <div class="account">
+          <div class="row">
+            <div class="email">
+              <input
+                type="text"
+                id="emailModal"
+                name="emailModal"
+                placeholder="E-mail"
+                ngModel
+              />
+            </div>
+            <div class="password">
+              <input
+                [type]="viewPasswordModal ? 'text' : 'password'"
+                id="passwordModal"
+                name="passwordModal"
+                placeholder="Senha"
+                ngModel
+              />
+              <div
+                class="icon eye"
+                (click)="viewPasswordModal = !viewPasswordModal"
+              ></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="firstName">
+              <input
+                type="text"
+                id="firstNameModal"
+                name="firstNameModal"
+                placeholder="Nome"
+                ngModel
+              />
+            </div>
+            <div class="lastName">
+              <input
+                type="text"
+                id="lastNameModal"
+                name="lastNameModal"
+                placeholder="Sobrenome"
+                ngModel
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="cpf">
+              <input
+                type="text"
+                id="cpfModal"
+                name="cpfModal"
+                placeholder="CPF"
+                ngModel
+              />
+            </div>
+            <div class="typeAccount">
+              <p>Perfil de:</p>
+              <div class="inputs">
+                <div class="team">
+                  <input
+                    type="radio"
+                    id="teamModal"
+                    name="roleType"
+                    value="ROLE_TEAM"
+                    ngModel
+                  />
+                  <label for="teamModal">Time</label>
+                </div>
+                <div class="player">
+                  <input
+                    type="radio"
+                    id="playerModal"
+                    name="roleType"
+                    value="ROLE_PLAYER"
+                    ngModel
+                  />
+                  <label for="playerModal">Jogador</label>
+                </div>
+              </div>
+            </div>
+            <div class="work">
+              <p>Aberto a vagas:</p>
+              <div class="inputs">
+                <div class="openToWork">
+                  <input
+                    type="radio"
+                    name="openToWorkModal"
+                    id="openToWorkModal"
+                    value="true"
+                    ngModel
+                  />
+                  <label for="openToWorkModal">Sim</label>
+                </div>
+                <div class="closedToWork">
+                  <input
+                    type="radio"
+                    name="openToWorkModal"
+                    id="closedToWorkModal"
+                    value="false"
+                    ngModel
+                  />
+                  <label for="closedToWorkModal">Não</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Criar" />
+      </form>
+    </div>
+  </div>
+</div>

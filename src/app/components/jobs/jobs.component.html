@@ -10,7 +10,7 @@
           </p>
         </div>
         <div class="titleJob">
-          <p>{{ job.vacancyName }} - {{ job.games }}</p>
+          <p>{{ job.vacancyName }}</p>
         </div>
       </div>
     </div>
@@ -27,7 +27,6 @@
         <div class="infos">
           <div class="title">
             <h2><span>Vaga:</span> {{ vacancyName }}</h2>
-            <h2><span>Jogo:</span> {{ teamGame }}</h2>
           </div>
           <p>
             {{ vacancyDescription }}
@@ -77,8 +76,8 @@
       <div class="vacancys">
         <h4>Vagas:</h4>
         <div class="vacancy">
-          <h3>{{ vacancys.name }}</h3>
-          <p>{{ vacancys.description }}</p>
+          <h3>{{ vacancysDtoName }}</h3>
+          <p>{{ vacancysDtoDescription }}</p>
         </div>
       </div>
     </div>

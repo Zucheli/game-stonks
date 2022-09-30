@@ -23,12 +23,13 @@ export class JobsComponent implements OnInit {
   teamGame: string = '';
   teamDescription: string = '';
 
-  vacancys: any;
   vacancyId: number = 0;
   vacancyName: string = '';
   vacancyDescription: string = '';
   vacancyEndDate: string = '';
   vacancyStartDate: string = '';
+  vacancysDtoName: string = '';
+  vacancysDtoDescription: string = '';
 
   constructor(
     private authService: AuthService,
@@ -95,8 +96,8 @@ export class JobsComponent implements OnInit {
   getTeam() {
     this.authService.getTeam(this.teamId).subscribe({
       next: (response) => {
-        console.log(response);
-        this.vacancys = response.vacancyDto;
+        this.vacancysDtoName = response.vacancyDto.name;
+        this.vacancysDtoDescription = response.vacancyDto.description;
         this.vacancyId = response.vacancyDto.id;
         this.teamDescription = response.description;
       },
