@@ -19,47 +19,46 @@
       </svg>
       <p>Criar Sala de Treinamento</p>
     </div>
-    <!-- <div *ngFor="let job of arrayJobs">
-      <div class="job">
-        <div class="team">
-          <p class="nameTeam">
-            {{ job.teamName }}
+    <div *ngFor="let room of arrayRooms">
+      <div class="room" (click)="openDetail(room)">
+        <div class="name">
+          <p class="nameRoom">
+            {{ room.trainingRoomName }}
           </p>
         </div>
-        <div class="titleJob">
-          <p>{{ job.vacancyName }}</p>
+        <div class="game">
+          <p>{{ room.game }}</p>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 
   <div class="divider"></div>
 
   <div class="content">
-    <!-- <div class="card" id="card">
-      <div class="team">
-        <p class="nameTeam">{{ teamName }}</p>
+    <div class="card" id="card">
+      <div class="name">
+        <p class="nameResponsible">{{ cardResponsible }}</p>
       </div>
       <div class="description">
         <div class="infos">
           <div class="title">
-            <h2><span>Vaga:</span> {{ vacancyName }}</h2>
+            <h2><span>Sala:</span>{{ cardName }}</h2>
+            <h2><span>Jogo:</span>{{ cardGame }}</h2>
           </div>
-          <p>
-            {{ vacancyDescription }}
-          </p>
+          <p>{{ cardDescription }}</p>
         </div>
         <div class="date">
           <p>
-            Período de inscrição: <span>{{ vacancyStartDate }}</span> até
-            <span>{{ vacancyEndDate }}</span>
+            Período de acesso: <span>{{ cardStartDate }}</span> até
+            <span>{{ cardEndDate }}</span>
           </p>
         </div>
       </div>
       <div class="buttons">
-        <button>Candidatar-se</button>
+        <button (click)="applyRoom(cardId)">Solicitar acesso</button>
       </div>
-    </div> -->
+    </div>
   </div>
 
   <div class="divider"></div>
