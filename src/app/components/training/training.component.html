@@ -1,0 +1,216 @@
+<app-header></app-header>
+
+<section class="container">
+  <div class="list">
+    <div class="addRoom" (click)="showModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18.3264 9C18.7583 9.90926 19 10.9264 19 12C19 14.4504 17.7409 16.6067 15.8344 17.8573C14.733 18.5798 13.4156 19 12 19C10.5844 19 9.26697 18.5798 8.16559 17.8573C6.25908 16.6067 5 14.4504 5 12C5 8.13401 8.13401 5 12 5C13.7135 5 15.2832 5.61568 16.5 6.63789M9 12H15M12 9V15"
+          stroke="#EFEFFF"
+          stroke-width="1.5"
+          stroke-linecap="round"
+        />
+      </svg>
+      <p>Criar Sala de Treinamento</p>
+    </div>
+    <!-- <div *ngFor="let job of arrayJobs">
+      <div class="job">
+        <div class="team">
+          <p class="nameTeam">
+            {{ job.teamName }}
+          </p>
+        </div>
+        <div class="titleJob">
+          <p>{{ job.vacancyName }}</p>
+        </div>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+    <!-- <div class="card" id="card">
+      <div class="team">
+        <p class="nameTeam">{{ teamName }}</p>
+      </div>
+      <div class="description">
+        <div class="infos">
+          <div class="title">
+            <h2><span>Vaga:</span> {{ vacancyName }}</h2>
+          </div>
+          <p>
+            {{ vacancyDescription }}
+          </p>
+        </div>
+        <div class="date">
+          <p>
+            Período de inscrição: <span>{{ vacancyStartDate }}</span> até
+            <span>{{ vacancyEndDate }}</span>
+          </p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button>Candidatar-se</button>
+      </div>
+    </div> -->
+  </div>
+
+  <div class="divider"></div>
+
+  <app-publi [bigPubli]="bigPubli" [hasHeader]="hasHeader"></app-publi>
+</section>
+
+<div class="modalAddRoom" id="modalAddRoom">
+  <div class="backdrop" (click)="closeModal()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Sala de Treinamento</h2>
+      <form #t="ngForm" (ngSubmit)="createRoom(t)">
+        <div class="account">
+          <div class="row">
+            <div class="group">
+              <label>Nome:</label>
+              <div class="name">
+                <input type="text" id="nameModal" name="nameModal" ngModel />
+              </div>
+            </div>
+            <div class="group">
+              <label>Jogo:</label>
+              <div class="game">
+                <input type="text" id="gameModal" name="gameModal" ngModel />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Data de início:</label>
+              <div class="date">
+                <input
+                  type="datetime-local"
+                  id="dateStartModal"
+                  name="dateStartModal"
+                  ngModel
+                />
+              </div>
+            </div>
+            <div class="group">
+              <label>Data de fim:</label>
+              <div class="date">
+                <input
+                  type="datetime-local"
+                  id="dateEndModal"
+                  name="dateEndModal"
+                  ngModel
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Descrição:</label>
+              <div class="description">
+                <textarea id="descriptionModal" name="descriptionModal" ngModel>
+                </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Dias da Semana:</label>
+              <div class="weekDays">
+                <div class="sunday">
+                  <input
+                    type="checkbox"
+                    id="sundayModal"
+                    name="sundayModal"
+                    ngModel
+                  />
+                  <label for="sundayModal">Domingo</label>
+                </div>
+                <div class="monday">
+                  <input
+                    type="checkbox"
+                    id="mondayModal"
+                    name="mondayModal"
+                    ngModel
+                  />
+                  <label for="mondayModal">Segunda</label>
+                </div>
+                <div class="tuesday">
+                  <input
+                    type="checkbox"
+                    id="tuesdayModal"
+                    name="tuesdayModal"
+                    ngModel
+                  />
+                  <label for="tuesdayModal">Terça</label>
+                </div>
+                <div class="wednesday">
+                  <input
+                    type="checkbox"
+                    id="wednesdayModal"
+                    name="wednesdayModal"
+                    ngModel
+                  />
+                  <label for="wednesdayModal">Quarta</label>
+                </div>
+                <div class="thursday">
+                  <input
+                    type="checkbox"
+                    id="thursdayModal"
+                    name="thursdayModal"
+                    ngModel
+                  />
+                  <label for="thursdayModal">Quinta</label>
+                </div>
+                <div class="friday">
+                  <input
+                    type="checkbox"
+                    id="fridayModal"
+                    name="fridayModal"
+                    ngModel
+                  />
+                  <label for="fridayModal">Sexta</label>
+                </div>
+                <div class="saturday">
+                  <input
+                    type="checkbox"
+                    id="saturdayModal"
+                    name="saturdayModal"
+                    ngModel
+                  />
+                  <label for="saturdayModal">Sabádo</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Criar" />
+      </form>
+    </div>
+  </div>
+</div>

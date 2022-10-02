@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
   cpfModal: string = '';
   roleTeamType: string = '';
   openToWorkModal: any;
+  roleId: number = 0;
 
   constructor(private authService: AuthService, public router: Router) {}
 
@@ -95,6 +96,7 @@ export class LoginComponent implements OnInit {
       });
     } else {
       openToWork == 'true' ? true : false;
+      roleType == 'ROLE_PLAYER' ? (this.roleId = 1) : (this.roleId = 2);
 
       let postAccount = {
         cpf: cpf,
@@ -105,6 +107,7 @@ export class LoginComponent implements OnInit {
         password: password,
         roleDto: {
           authority: roleType,
+          id: this.roleId,
         },
       };
 

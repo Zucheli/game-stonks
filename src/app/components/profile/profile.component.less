@@ -46,10 +46,20 @@
                     background-repeat: no-repeat;
                     background-image: url(../../../assets/avatar.svg);
                 }
+
+                .infos {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+
+                    .icon {
+                        cursor: pointer;
+                    }
+                }
             }
         }
 
-        .descriptions {
+        .playerContent {
             gap: 20px;
             width: 100%;
             height: auto;
@@ -104,8 +114,14 @@
 
             .about {
                 .text {
-                    line-height: 20px;
-                    font-size: 14px;
+                    .description {
+                        line-height: 20px;
+                        font-size: 14px;
+
+                        &.add {
+                            text-align: center;
+                        }
+                    }
                 }
 
                 .infos {
@@ -131,6 +147,13 @@
             }
 
             .games {
+                .tip {
+                    display: flex;
+                    padding: 10px 0;
+                    align-items: center;
+                    justify-content: center;
+                }
+
                 .list {
                     gap: 10px;
                     display: flex;
@@ -144,7 +167,11 @@
                         .image {
                             width: 50px;
                             height: 50px;
-                            background-color: @neutra;
+                            border-radius: 12px;
+
+                            &.red {
+                                background-color: red;
+                            }
                         }
                     }
                 }
@@ -162,5 +189,229 @@
     app-publi {
         width: 100%;
         height: 100%;
+    }
+}
+
+.modalUpdate {
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+
+    .backdrop {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modalContainer {
+        z-index: 2;
+        width: 40%;
+        height: 55%;
+        border-radius: 12px;
+        background-color: @neutra;
+
+        .close {
+            text-align: end;
+            position: relative;
+            margin: 5px 5px 0 0;
+
+            svg {
+                cursor: pointer;
+            }
+        }
+
+        .modalContent {
+            gap: 20px;
+            width: 98%;
+            height: calc(100% - 53px);
+            display: flex;
+            overflow: auto;
+            padding: 0 20px;
+            margin: 0 0 20px;
+            flex-direction: column;
+
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: @neutra;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: @fundo;
+                border-radius: 10px;
+            }
+
+            h2 {
+                text-align: center;
+            }
+
+            form {
+                gap: 50px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+    
+                .account {
+                    gap: 20px;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+
+                    .row {
+                        gap: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+
+                        input, textarea {
+                            width: 100%;
+                            border: none;
+                            outline: none;
+                            color: @branco;
+                            grid-area: input;
+                            background-color: transparent;
+                        }
+
+                        textarea {
+                            height: 100%;
+                            resize: none;
+                            padding: 10px 0;
+
+                            &::-webkit-scrollbar {
+                                width: 5px;
+                            }
+                
+                            &::-webkit-scrollbar-track {
+                                background: @fundo;
+                            }
+                
+                            &::-webkit-scrollbar-thumb {
+                                background: @neutra;
+                                border-radius: 10px;
+                            }
+                        }
+
+                        .group {
+                            gap: 5px;
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+
+                            label {
+                                font-size: 12px;
+                            }
+
+                            .email, .password, .firstName, .lastName, .cpf, .experience, .level, .description{
+                                height: 40px;
+                                display: flex;
+                                padding: 0 10px;
+                                align-items: center;
+                                border-radius: 12px;
+                                background-color: @fundo;
+                            }
+
+                            .description {
+                                height: 80px;
+                            }
+    
+                            .password {
+                                display: grid;
+                                padding: 0 0 0 10px;
+                                grid-template-columns: auto 40px;
+                                grid-template-areas: 'input eye';
+    
+                                .icon {
+                                    &.eye {
+                                        width: 100%;
+                                        height: 100%;
+                                        grid-area: eye;
+                                        cursor: pointer;
+                                        background-size: 70%;
+                                        background-position: center;
+                                        background-repeat: no-repeat;
+                                        background-image: url(../../../assets/icons/eye.svg);
+                                    }
+                                }
+                            }
+
+                            .games {
+                                gap: 10px;
+                                display: flex;
+                                padding: 10px;
+                                color: @branco;
+                                border-radius: 12px;
+                                flex-direction: column;
+                                background-color: @fundo;
+
+                                .tip {
+                                    display: flex;
+                                    padding: 10px 0;
+                                    align-items: center;
+                                    justify-content: center;
+                                }
+
+                                .list {
+                                    gap: 10px;
+                                    display: flex;
+                                    flex-direction: column;
+                
+                                    .game {
+                                        gap: 10px;
+                                        display: flex;
+                                        align-items: center;
+                
+                                        .image {
+                                            width: 50px;
+                                            height: 50px;
+                                            border-radius: 12px;
+                
+                                            &.red {
+                                                background-color: red;
+                                            }
+                                        }
+
+                                        .icon {
+                                            cursor: pointer;
+                                        }
+                                    }
+                                }
+
+                                .addGame {
+                                    gap: 5px;
+                                    display: flex;
+                                    cursor: pointer;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    p {
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                .button {
+                    width: 100%;
+                    height: 65px;
+                    border: none;
+                    color: @branco;
+                    cursor: pointer;
+                    text-align: center;
+                    border-radius: 12px;
+                    font-family: 'Inter';
+                    background-color: @fundo;
+                }
+            }
+        }
     }
 }

@@ -11,6 +11,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { PubliComponent } from './components/partials/publi/publi.component';
+import { PlayersComponent } from './components/players/players.component';
+import { TrainingComponent } from './components/training/training.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { PubliComponent } from './components/partials/publi/publi.component';
     JobsComponent,
     HeaderComponent,
     PubliComponent,
+    PlayersComponent,
+    TrainingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, CoreModule, FormsModule],
   providers: [],

@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<section class="container">
+  <div class="list">
+    <div *ngFor="let player of arrayPlayers">
+      <div class="player" id="{{ player.id }}">
+        <div class="top">
+          <p class="namePlayer">
+            {{ player.name }}
+          </p>
+          <div class="invite" (click)="invitePlayer(player)">
+            <p>Convidar</p>
+          </div>
+        </div>
+        <div class="bottom">
+          <p>Email: {{ player.email }}</p>
+          <p>Experiência: {{ player.yearsOfExperience }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <app-publi [bigPubli]="bigPubli" [hasHeader]="hasHeader"></app-publi>
+</section>

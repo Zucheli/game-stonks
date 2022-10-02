@@ -15,6 +15,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  ngOnInit(): void {}
+
   login(login: any): Observable<any> {
     const body = new HttpParams()
       .set('username', login.username)
@@ -30,6 +32,18 @@ export class AuthService {
 
   getListJobs(): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/teams/vacancies`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  getListPlayers(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/teams/playersOpenToWork`, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  getListRooms(): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/training-rooms`, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
     });
   }
@@ -59,7 +73,26 @@ export class AuthService {
   }
 
   creatAccount(account: any): Observable<any> {
-    return this.http.post<any>(`${this.baseURL}/players`, account, {
+    return this.http.post<any>(`${this.baseURL}/players/create`, account);
+  }
+
+  updateAccount(request: any): Observable<any> {
+    return this.http.put<any>(`${this.baseURL}/players/update`, request, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+    });
+  }
+
+  invitePlayer(playerId: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseURL}/teams/invitePlayer/${playerId}`,
+      {
+        headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
+      }
+    );
+  }
+
+  createRoom(request: any): Observable<any> {
+    return this.http.post<any>(`${this.baseURL}/training-rooms`, request, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
     });
   }

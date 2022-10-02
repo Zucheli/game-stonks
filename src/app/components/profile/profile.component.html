@@ -11,59 +11,61 @@
       <div class="user">
         <div class="image"></div>
         <div class="infos">
-          <h2>Fulano de Tal</h2>
-          <p>ProPlayer</p>
+          <h2>{{ userFirstName }} {{ userLastName }}</h2>
+          <div class="icon" (click)="editProfile()">
+            <svg
+              width="30"
+              height="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.3032 10.0251L18.7174 8.61093C19.4985 7.82988 19.4985 6.56355 18.7174 5.7825C17.9364 5.00145 16.6701 5.00145 15.889 5.7825L15.1819 6.48961C14.7914 6.88013 14.7914 7.5133 15.1819 7.90382L17.3032 10.0251ZM17.3032 10.0251L11.5055 15.8229C11.3645 15.9639 11.2032 16.083 11.027 16.1763L8.15472 17.6969C7.28439 18.1577 6.34228 17.2155 6.80304 16.3452L8.32368 13.4729C8.41696 13.2967 8.53606 13.1354 8.67704 12.9945L12.707 8.96448"
+                stroke="#211D28"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
-    <div class="descriptions">
+    <div class="playerContent">
       <div class="about">
         <div class="title">
           <p>Sobre</p>
-          <div class="buttons">
-            <div class="icon edit"></div>
-          </div>
         </div>
-        <p class="text">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae,
-          corporis dolores! Expedita sunt enim, explicabo itaque consequuntur
-          nesciunt maiores distinctio cupiditate! Delectus iste neque omnis,
-          maxime nemo esse ea deleniti. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Itaque ipsa expedita ratione blanditiis esse non.
-          Ipsum veritatis temporibus magnam, harum minus eligendi unde
-          dignissimos, exercitationem ducimus cumque, veniam nisi odio!
-        </p>
+        <div class="text">
+          <p class="description" *ngIf="userDescription != null">
+            {{ userDescription }}
+          </p>
+          <p class="description add" *ngIf="userDescription == null">
+            Edite seu perfil e adicione um texto sobre você!
+          </p>
+        </div>
         <div class="infos">
           <div class="experience">
-            <p class="title">Anos de Experiência:</p>
-            <p class="text">8</p>
+            <p class="title">Experiência:</p>
+            <p class="text">{{ userExperience }}</p>
           </div>
           <div class="rank">
             <p class="title">Rank:</p>
-            <p class="text">#2</p>
+            <p class="text">#{{ userLevel }}</p>
           </div>
         </div>
       </div>
       <div class="games">
         <div class="title">
-          <p>Experiência</p>
-          <div class="buttons">
-            <div class="icon add"></div>
-            <div class="icon edit"></div>
-          </div>
+          <p>Jogos</p>
         </div>
-        <div class="list">
+        <div class="tip" *ngIf="userGames.length == 0">
+          <p>Edite seu perfil e adicione os jogos que você joga!</p>
+        </div>
+        <div class="list" *ngFor="let game of userGames">
           <div class="game">
-            <div class="image"></div>
-            <p>CSS</p>
-          </div>
-          <div class="game">
-            <div class="image"></div>
-            <p>Valorant</p>
-          </div>
-          <div class="game">
-            <div class="image"></div>
-            <p>Free Fire</p>
+            <div class="image red"></div>
+            <p>{{ game.name }}</p>
           </div>
         </div>
       </div>
@@ -74,3 +76,149 @@
 
   <app-publi [bigPubli]="bigPubli"></app-publi>
 </section>
+
+<div class="modalUpdate" id="modalUpdate">
+  <div class="backdrop" (click)="closeModal()"></div>
+  <div class="modalContainer">
+    <div class="close" (click)="closeModal()">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.4801 6.26993L6.51992 17.2301M17.4801 17.2301L13.4142 13.1642M6.51992 6.26993L10.5858 10.3358"
+          stroke="#211D28"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <div class="modalContent">
+      <h2>Dados pessoais</h2>
+      <form #u="ngForm" (ngSubmit)="updateAccount(u)">
+        <div class="account">
+          <div class="row">
+            <div class="group">
+              <label>Email:*</label>
+              <div class="email">
+                <input
+                  type="text"
+                  id="emailModal"
+                  name="emailModalUp"
+                  placeholder="E-mail"
+                  [(ngModel)]="userEmailUp"
+                  ngModel
+                />
+              </div>
+            </div>
+            <div class="group">
+              <label>Nova Senha:</label>
+              <div class="password">
+                <input
+                  [type]="viewPasswordUpdateModal ? 'text' : 'password'"
+                  id="passwordModal"
+                  name="passwordModalUp"
+                  placeholder="Senha"
+                  ngModel
+                />
+                <div
+                  class="icon eye"
+                  (click)="viewPasswordUpdateModal = !viewPasswordUpdateModal"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Nome:*</label>
+              <div class="firstName">
+                <input
+                  type="text"
+                  id="firstNameModal"
+                  name="firstNameModalUp"
+                  placeholder="Nome"
+                  [(ngModel)]="userFirstNameUp"
+                  ngModel
+                />
+              </div>
+            </div>
+            <div class="group">
+              <label>Sobrenome:*</label>
+              <div class="lastName">
+                <input
+                  type="text"
+                  id="lastNameModal"
+                  name="lastNameModalUp"
+                  placeholder="Sobrenome"
+                  [(ngModel)]="userLastNameUp"
+                  ngModel
+                />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>Descrição:</label>
+              <div class="description">
+                <textarea
+                  id="descriptionModal"
+                  name="descriptionModalUp"
+                  placeholder="Descrição"
+                  [(ngModel)]="userDescriptionUp"
+                  ngModel
+                >
+                </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="group">
+              <label>CPF:*</label>
+              <div class="cpf">
+                <input
+                  type="text"
+                  id="cpfModal"
+                  name="cpfModalUp"
+                  placeholder="CPF"
+                  [(ngModel)]="userCpfUp"
+                  ngModel
+                />
+              </div>
+            </div>
+            <div class="group">
+              <label>Experiência:</label>
+              <div class="experience">
+                <input
+                  type="text"
+                  id="experienceModal"
+                  name="experienceModalUp"
+                  placeholder="Experiência"
+                  [(ngModel)]="userExperienceUp"
+                  ngModel
+                />
+              </div>
+            </div>
+            <div class="group">
+              <label>Rank:</label>
+              <div class="level">
+                <input
+                  type="text"
+                  id="levelModal"
+                  name="levelModalUp"
+                  placeholder="Rank"
+                  [(ngModel)]="userLevelUp"
+                  ngModel
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <input class="button" type="submit" value="Salvar" />
+      </form>
+    </div>
+  </div>
+</div>

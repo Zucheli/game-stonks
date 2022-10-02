@@ -4,9 +4,14 @@
       <h1>Seja bem-vindo ao ntime</h1>
     </div>
     <div class="cards">
-      <a routerLink="/jobs" class="card">
+      <a routerLink="/jobs" class="card" *ngIf="roleType == 'ROLE_PLAYER'">
         <div class="icon jobs"></div>
         <p>Vagas</p>
+      </a>
+
+      <a routerLink="/players" class="card" *ngIf="roleType == 'ROLE_TEAM'">
+        <div class="icon jobs"></div>
+        <p>Jogadores</p>
       </a>
 
       <a routerLink="/training" class="card">
