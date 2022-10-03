@@ -18,6 +18,8 @@ export class JobsComponent implements OnInit {
   hasHeader: boolean = true;
   arrayJobs: any[] = [];
 
+  gameId: number = 0;
+
   teamId: number = 0;
   teamName: string = '';
   teamGame: string = '';
@@ -60,6 +62,9 @@ export class JobsComponent implements OnInit {
       card.style.display = 'grid';
     }
 
+    console.log(job);
+
+    this.gameId = job.gameId;
     this.teamId = job.teamId;
     this.teamName = job.teamName;
     this.teamGame = job.games;
@@ -108,6 +113,7 @@ export class JobsComponent implements OnInit {
     let infos = {
       teamId: this.teamId,
       vacancyId: this.vacancyId,
+      gameId: this.gameId,
     };
 
     this.authService.applyVacancy(infos).subscribe({

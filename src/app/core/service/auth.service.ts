@@ -56,7 +56,7 @@ export class AuthService {
 
   applyVacancy(infos: any): Observable<any> {
     return this.http.get<any>(
-      `${this.baseURL}/players/${infos.vacancyId}/teams/${infos.teamId}`,
+      `${this.baseURL}/players/${infos.vacancyId}/teams/${infos.teamId}/games/${infos.gameId}`,
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
       }
