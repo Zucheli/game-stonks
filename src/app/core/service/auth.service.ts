@@ -64,7 +64,7 @@ export class AuthService {
   }
 
   applyRoom(id: any): Observable<any> {
-    return this.http.post<any>(`${this.baseURL}/training-rooms/${id}/request`, {
+    return this.http.get<any>(`${this.baseURL}/training-rooms/${id}/request`, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),
     });
   }
@@ -89,7 +89,7 @@ export class AuthService {
   }
 
   invitePlayer(playerId: any): Observable<any> {
-    return this.http.post<any>(
+    return this.http.get<any>(
       `${this.baseURL}/teams/invitePlayer/${playerId}`,
       {
         headers: new HttpHeaders().set('Authorization', 'Bearer ' + this.token),

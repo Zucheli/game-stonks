@@ -48,14 +48,12 @@ export class PlayersComponent implements OnInit {
 
     this.authService.invitePlayer(this.playerId).subscribe({
       next: (response) => {
-        console.log(response);
         Swal.fire({
-          text: 'Jogador convidado com sucesso',
+          text: 'Jogador convidado com sucesso!',
           icon: 'success',
         });
       },
       error: (error) => {
-        console.log(error);
         Swal.fire({
           text: 'Erro ao convidar jogador!',
           icon: 'error',

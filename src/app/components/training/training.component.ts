@@ -39,7 +39,6 @@ export class TrainingComponent implements OnInit {
     this.authService.getListRooms().subscribe({
       next: (response) => {
         this.arrayRooms = response;
-        console.log(this.arrayRooms);
       },
       error: (error) => {
         Swal.fire({
@@ -153,10 +152,16 @@ export class TrainingComponent implements OnInit {
   applyRoom(cardId: any) {
     this.authService.applyRoom(cardId).subscribe({
       next: (response) => {
-        console.log(response);
+        Swal.fire({
+          text: 'Solicitação enviada com sucesso!',
+          icon: 'success',
+        });
       },
       error: (error) => {
-        console.log(error);
+        Swal.fire({
+          text: 'Erro ao solicitar acesso!',
+          icon: 'error',
+        });
       },
     });
   }
